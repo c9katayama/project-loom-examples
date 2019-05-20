@@ -1,0 +1,35 @@
+
+group 'projectloom.examples'
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 11
+
+repositories {
+  mavenCentral()
+}
+
+buildscript {
+  repositories {
+      mavenCentral()
+  }
+  dependencies {
+      classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+  }
+}
+
+apply plugin: "io.spring.dependency-management"
+
+dependencyManagement {
+  imports {
+      mavenBom 'software.amazon.awssdk:bom:2.3.9'
+  }
+}
+
+dependencies {
+  compile 'software.amazon.awssdk:dynamodb'
+  testCompile group: 'junit', name: 'junit', version: '4.11'
+}
